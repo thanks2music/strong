@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+.wf-nunito {
+  @extend %webfont-nunito;
+}
+
+.webfont {
+  &.nunito {
+    @extend %webfont-nunito;
+  }
+}
+
+#logo {
+  &.rere {
+    @extend %webfont-nunito;
+  }
+}
