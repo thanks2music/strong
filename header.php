@@ -42,13 +42,13 @@
 <?php if ( get_theme_mod( 'opencage_logo' ) ) : ?>
 <h1 class="h1 img"><a href="<?php echo home_url(); ?>" rel="nofollow"><img src="<?php echo get_theme_mod( 'opencage_logo' ); ?>" alt="<?php bloginfo('name'); ?>"></a></h1>
 <?php else : ?>
-<h1 class="h1 text"><a href="<?php echo home_url(); ?>" rel="nofollow" title="コラボカフェ.com">Collabo Cafe</a></h1>
+<h1 class="h1 text"><a href="<?php echo home_url(); ?>" rel="nofollow"><?php bloginfo('name'); ?></a></h1>
 <?php endif; ?>
 <?php else: ?>
 <?php if ( get_theme_mod( 'opencage_logo' ) ) : ?>
 <p class="h1 img"><a href="<?php echo home_url(); ?>"><img src="<?php echo get_theme_mod( 'opencage_logo' ); ?>" alt="<?php bloginfo('name'); ?>"></a></p>
 <?php else : ?>
-<p class="h1 text"><a href="<?php echo home_url(); ?>" title="コラボカフェ.com">Collabo Cafe</a></p>
+<p class="h1 text"><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></p>
 <?php endif; ?>
 <?php endif; ?>
 </div>
