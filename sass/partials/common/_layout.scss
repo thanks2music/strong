@@ -15,3 +15,18 @@
     @extend %webfont-nunito;
   }
 }
+
+.re-gallery {
+  figure {
+    margin: 0 0 2em 0;
+
+    a {
+      img {
+        margin: 0;
+      }
+    }
+    figcaption {
+      display: none;
+    }
+  }
+}

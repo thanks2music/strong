@@ -98,26 +98,52 @@
 
         // for Gallery
         if (gallery.length) {
-            gallery.wrap('<div class="re-gallery">');
-            var thumbnail = gallery.find('a');
-
-            if (thumbnail.length) {
-                thumbnail.each(function () {
+            var replaceGallerySetting = function replaceGallerySetting(element) {
+                element.each(function (i) {
                     // Create Caption Text
                     var captionText = $(this).attr('data-caption-title');
+                    var currentIndex = i + 1;
                     // img情報
-                    var img = $(this)[0].children,
-                        width = img[0].naturalWidth,
-                        height = img[0].naturalHeight,
-                        size = width + 'x' + height,
+                    var img = this.children[0],
+                        width = img.naturalWidth,
+                        height = img.naturalHeight;
+
+                    if (width === 0 || height === 0) {
+                        width = $(this).outerWidth() * 2;
+                        height = $(this).outerHeight() * 2;
+                    }
+
+                    // w x h の文字列を保存
+                    var size = width + 'x' + height,
                         naturalSize = String(size);
 
-                    // set data size
-                    $(this).attr('data-size', naturalSize);
+                    // caption設定していなかった場合
+                    if (captionText === undefined) {
+                        if (headlineText === undefined) {
+                            headlineText = '';
+                        }
+
+                        captionText = headlineText + ' ' + currentIndex;
+                    }
+
                     // figureで囲む
                     $(this).wrap('<figure>');
                     // figureの末尾にfigcaptionを追加する
                     $(this).after('<figcaption>' + captionText);
+                    // set data size
+                    $(this).attr('data-size', naturalSize);
+                });
+            };
+
+            gallery.wrap('<div class="re-gallery">');
+
+            var thumbnail = gallery.find('a');
+            var thumbnailImages = gallery.find('img');
+            var headlineText = gallery.parent().siblings('h3').text();
+
+            if (thumbnail.length) {
+                $(window).on('load', function () {
+                    replaceGallerySetting(thumbnail);
                 });
             }
         }

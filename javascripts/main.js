@@ -24,25 +24,51 @@
     // for Gallery
     if (gallery.length) {
       gallery.wrap('<div class="re-gallery">');
+
       let thumbnail = gallery.find('a');
+      let thumbnailImages = gallery.find('img');
+      let headlineText = gallery.parent().siblings('h3').text();
 
       if (thumbnail.length) {
-        thumbnail.each(function() {
+        $(window).on('load', function() {
+          replaceGallerySetting(thumbnail);
+        });
+      }
+
+      function replaceGallerySetting(element) {
+        element.each(function(i) {
           // Create Caption Text
           let captionText = $(this).attr('data-caption-title');
+          let currentIndex = i + 1;
           // img情報
-          let img = $(this)[0].children,
-              width = img[0].naturalWidth,
-              height = img[0].naturalHeight,
-              size = width + 'x' + height,
-              naturalSize = String(size);
+          let img = this.children[0],
+              width = img.naturalWidth,
+              height  = img.naturalHeight;
 
-          // set data size
-          $(this).attr('data-size', naturalSize);
+          if (width === 0 || height === 0) {
+            width = $(this).outerWidth() * 2;
+            height = $(this).outerHeight() * 2;
+          }
+
+          // w x h の文字列を保存
+          let size = width + 'x' + height,
+          naturalSize = String(size);
+
+          // caption設定していなかった場合
+          if (captionText === undefined) {
+            if (headlineText === undefined) {
+              headlineText = '';
+            }
+
+            captionText = headlineText + ' ' + currentIndex;
+          }
+
           // figureで囲む
           $(this).wrap('<figure>');
           // figureの末尾にfigcaptionを追加する
           $(this).after('<figcaption>' + captionText);
+          // set data size
+          $(this).attr('data-size', naturalSize);
         });
       }
     }

@@ -4,6 +4,7 @@
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 function theme_enqueue_styles() {
   global $dir;
+  $time_stamp = time();
   wp_enqueue_style('style', get_template_directory_uri() . '/style.css' );
 
   // Google WebFont
@@ -13,7 +14,7 @@ function theme_enqueue_styles() {
   wp_enqueue_style('photoswipe_skin', $dir['theme'] . '/dist/photoswipe/default-skin/default-skin.css');
   // Main Style
   wp_enqueue_style('child-style',
-    $dir['theme'] . '/stylesheets/main.css',
+    $dir['theme'] . '/dist/css/main.css?' . $time_stamp,
     array('style')
   );
 }
