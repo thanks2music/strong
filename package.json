@@ -29,6 +29,7 @@
     "gulp-uglify": "^3.0.0",
     "imports-loader": "^0.7.1",
     "node-sass-package-importer": "^3.0.4",
+    "photoswipe": "^4.1.2",
     "webpack": "^2.4.1",
     "webpack-stream": "^3.2.0"
   }

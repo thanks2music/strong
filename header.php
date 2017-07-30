@@ -1,9 +1,10 @@
+<?php global $is_sp, $is_pc; ?>
 <!doctype html>
 <!--[if lt IE 7]><html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
 <!--[if (IE 7)&!(IEMobile)]><html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8"><![endif]-->
 <!--[if (IE 8)&!(IEMobile)]><html <?php language_attributes(); ?> class="no-js lt-ie9"><![endif]-->
 <!--[if gt IE 8]><!--> <html <?php language_attributes(); ?> class="no-js"><!--<![endif]-->
-
+<html lang="ja">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,8 +30,16 @@
 
 <?php wp_head(); ?>
 </head>
+<?php
+  $body_class = '';
 
-<body <?php body_class(); ?>>
+  if ($is_sp) {
+    $body_class .= 'sp';
+  } else {
+    $body_class .= 'pc';
+  }
+?>
+<body <?php body_class($body_class); ?>>
 <div id="container" class="<?php echo esc_html(get_option('post_options_ttl'));?> <?php echo esc_html(get_option('side_options_sidebarlayout'));?> <?php echo esc_html(get_option('post_options_date'));?>">
 <?php if(!is_singular( 'post_lp' ) ): ?>
 
