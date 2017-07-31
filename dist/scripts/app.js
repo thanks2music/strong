@@ -138,7 +138,6 @@
             gallery.wrap('<div class="re-gallery">');
 
             var thumbnail = gallery.find('a');
-            var thumbnailImages = gallery.find('img');
             var headlineText = gallery.parent().siblings('h3').text();
 
             if (thumbnail.length) {

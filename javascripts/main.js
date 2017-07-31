@@ -26,7 +26,6 @@
       gallery.wrap('<div class="re-gallery">');
 
       let thumbnail = gallery.find('a');
-      let thumbnailImages = gallery.find('img');
       let headlineText = gallery.parent().siblings('h3').text();
 
       if (thumbnail.length) {
