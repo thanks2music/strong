@@ -18,40 +18,62 @@
 
   // for Single
   if (body.hasClass('single')) {
-    // Gallery Wrap
+    // Gallery DOM
     let gallery = body.find('.foogallery-container');
+    // PhotoSwipe DOM
+    let photoSwipeDom = body.find('.psgal');
 
-    // for Gallery
+    // For PhotoSwipe Gallery
+    if (photoSwipeDom.length) {
+      let photoSwipeTrigger = photoSwipeDom.find('a');
+      let captionText = photoSwipeDom.siblings('h3').text();
+
+      function replacePhotoSwipeSetting(element) {
+        // h3設定し忘れていた場合、記事タイトルを入れる
+        if (captionText === undefined || captionText === '') {
+          captionText = photoSwipeDom.parents('.entry-title').text();
+        }
+
+        element.each(function(i) {
+          let currentIndex = i + 1;
+          // captionを設定
+          let figCaption = captionText + ' ' + currentIndex + '枚目';
+
+          // figcaptionにテキストを設定
+          $(this)
+            .attr('data-caption', figCaption)
+            .siblings('figcaption').text(figCaption);
+        });
+      }
+
+      // トリガーがあったら実行
+      if (photoSwipeTrigger.length) {
+        replacePhotoSwipeSetting(photoSwipeTrigger);
+      }
+    }
+
+    // for Foo Gallery
     if (gallery.length) {
+      // Foo Galleryがあったらトリガー用Classで囲む
       gallery.wrap('<div class="re-gallery">');
 
+      // サムネイル取得
       let thumbnail = gallery.find('a');
       let headlineText = gallery.parent().siblings('h3').text();
 
       if (thumbnail.length) {
+        replaceFooGalleryDom(thumbnail);
+
         $(window).on('load', function() {
-          replaceGallerySetting(thumbnail);
+          setFooGalleryImageSize(thumbnail);
         });
       }
 
-      function replaceGallerySetting(element) {
+      function replaceFooGalleryDom(element) {
         element.each(function(i) {
           // Create Caption Text
           let captionText = $(this).attr('data-caption-title');
           let currentIndex = i + 1;
-          // img情報
-          let img = this.children[0],
-              width = img.naturalWidth,
-              height  = img.naturalHeight;
-
-          if (width === 0 || height === 0) {
-            width = $(this).outerWidth() * 2;
-            height = $(this).outerHeight() * 2;
-          }
-
-          // w x h の文字列を保存
-          let size = width + 'x' + height,
-          naturalSize = String(size);
 
           // caption設定していなかった場合
           if (captionText === undefined) {
@@ -66,7 +88,26 @@
           $(this).wrap('<figure>');
           // figureの末尾にfigcaptionを追加する
           $(this).after('<figcaption>' + captionText);
-          // set data size
+        });
+      }
+
+      function setFooGalleryImageSize(element) {
+        element.each(function(i) {
+          // Image Setting
+          let img = this.children[0],
+              width = img.naturalWidth,
+              height  = img.naturalHeight;
+
+          if (width === 0 || width === undefined) {
+            width = $(this).outerWidth() * 2;
+            height = $(this).outerHeight() * 2;
+          }
+
+          // w x h の文字列を保存
+          let size = width + 'x' + height,
+              naturalSize = String(size);
+
+          // data属性をセット
           $(this).attr('data-size', naturalSize);
         });
       }
@@ -283,4 +324,3 @@
   // Initialize
   initPhotoSwipeFromDOM('.re-gallery');
 })();
-

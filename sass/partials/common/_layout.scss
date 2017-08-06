@@ -25,6 +25,27 @@
         margin: 0;
       }
     }
+
+    figcaption {
+      display: none;
+    }
+  }
+}
+
+// the_content()のsection
+.entry-content {
+  // PhotoSwipeDOM
+  .psgal {
+    @include mediaquery('max', 340px) {
+      width: 300px !important;
+    }
+
+    figure {
+      @include mediaquery('max', 340px) {
+        width: 100% !important;
+      }
+    }
+
     figcaption {
       display: none;
     }
