@@ -113,6 +113,62 @@
       }
     }
   }
+
+  // for Home
+  if (body.hasClass('home')) {
+    const bg = $('#bg-blur');
+    const slickElement = body.find('.slickcar');
+
+
+
+    if (bg.length) {
+      bg.backgroundBlur({
+        imageURL: bg.data('blurimg'),
+        blurAmount: 3,
+        imageClass: 'blur-img-svg'
+      });
+    }
+
+    // ピックアップがあったら
+    if (slickElement.length) {
+      slickElement.slick({
+        centerMode: true,
+        dots: true,
+        autoplay: false,
+        autoplaySpeed: 3000,
+        speed: 260,
+        centerPadding: '90px',
+        slidesToShow: 4,
+        responsive: [{
+          breakpoint: 1160,
+          settings: {
+            arrows: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 4
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            arrows: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 3
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            arrows: false,
+            centerMode: true,
+            centerPadding: '20px',
+            slidesToShow: 1
+          }
+        }]
+      });
+    }
+  }
 })(jQuery);
 
 // Vanilla JS

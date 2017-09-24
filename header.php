@@ -1,9 +1,5 @@
 <?php global $is_sp, $is_pc; ?>
 <!doctype html>
-<!--[if lt IE 7]><html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
-<!--[if (IE 7)&!(IEMobile)]><html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8"><![endif]-->
-<!--[if (IE 8)&!(IEMobile)]><html <?php language_attributes(); ?> class="no-js lt-ie9"><![endif]-->
-<!--[if gt IE 8]><!--> <html <?php language_attributes(); ?> class="no-js"><!--<![endif]-->
 <html lang="ja">
 <head>
 <meta charset="utf-8">
@@ -32,17 +28,24 @@
 </head>
 <?php
   $body_class = '';
+  $container_class = 'container';
 
   if ($is_sp) {
     $body_class .= 'sp';
+    $container_class .= ' sp';
   } else {
     $body_class .= 'pc';
+    $container_class .= ' pc';
   }
 ?>
 <body <?php body_class($body_class); ?>>
-<div id="container" class="<?php echo esc_html(get_option('post_options_ttl'));?> <?php echo esc_html(get_option('side_options_sidebarlayout'));?> <?php echo esc_html(get_option('post_options_date'));?>">
+<?php get_template_part('partials/meta/gtm'); ?>
+<div id="container" class="<?php echo $container_class; ?><?php echo esc_html(get_option('post_options_ttl'));?> <?php echo esc_html(get_option('side_options_sidebarlayout'));?> <?php echo esc_html(get_option('post_options_date'));?>">
 <?php if(!is_singular( 'post_lp' ) ): ?>
 
+<?php if ($is_sp) { // Templateを分ける
+  get_template_part('partials/sp/firstview');
+} else { ?>
 <?php if ( get_option( 'side_options_description' ) ) : ?><p class="site_description"><?php bloginfo('description'); ?></p><?php endif; ?>
 <header class="header animated fadeIn <?php echo esc_html(get_option('side_options_headerbg'));?> <?php if ( wp_is_mobile() ) : ?>headercenter<?php else:?><?php echo get_option( 'side_options_headercenter' ); ?><?php endif; ?>" role="banner">
 <div id="inner-header" class="wrap cf">
@@ -91,6 +94,7 @@
 
 </div>
 </header>
+<?php } // end if is_sp ?>
 
 <?php if (is_active_sidebar('sidebar-sp')):?>
 <div class="remodal" data-remodal-id="spnavi" data-remodal-options="hashTracking:false">
@@ -152,9 +156,10 @@
 <?php if ( get_option('other_options_headerunderlink') && get_option('other_options_headerundertext') ) : ?>
 <div class="header-info <?php echo esc_html(get_option('side_options_headerbg'));?>"><a<?php if(get_option('other_options_headerunderlink_target')):?> target="_blank"<?php endif;?> href="<?php echo esc_html(get_option('other_options_headerunderlink'));?>"><?php echo esc_html(get_option('other_options_headerundertext'));?></a></div>
 <?php endif;?>
-
-
-<?php get_template_part( 'parts_homeheader' ); ?>
-
+<?php
+  if ($is_pc) {
+    get_template_part( 'parts_homeheader' );
+  }
+?>
 <?php breadcrumb(); ?>
 <?php endif; ?>

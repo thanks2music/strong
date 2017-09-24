@@ -18,7 +18,7 @@ const header = require('gulp-header');
 const config = {
   supportBrowsers: ['ios >= 7', 'android >= 4.4'],
   images: 'images/**/*.+(jpeg|jpg|png|gif|svg)',
-  javascripts: 'javascripts/**/*.js',
+  javascripts: ['javascripts/**/*.js', '! javascripts/vendor/*.js'],
   sass: 'sass/**/*.scss',
 };
 

@@ -4,6 +4,16 @@
   font-family: 'Nunito', sans-serif;
 }
 
+%webfont-lato {
+  font-family: 'Lato', sans-serif;
+}
+
+// Font Awesome
+%webfont-fa {
+  font-family: 'fontawesome';
+  display: inline-block;
+}
+
 %clearfix {
   &:after {
     content: "";

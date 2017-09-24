@@ -8,7 +8,7 @@ function theme_enqueue_styles() {
   wp_enqueue_style('style', get_template_directory_uri() . '/style.css' );
 
   // Google WebFont
-  wp_enqueue_style('webfont', 'https://fonts.googleapis.com/css?family=Amatic+SC|Asap|Cabin|Dancing+Script|Dosis|Exo|Inconsolata|Love+Ya+Like+A+Sister|Montserrat|Nunito|Questrial|Quicksand|Ravi+Prakash|Satisfy');
+  wp_enqueue_style('webfont', 'https://fonts.googleapis.com/css?family=Lato|Nunito');
   // Vendor
   wp_enqueue_style('photoswipe', $dir['theme'] . '/dist/photoswipe/photoswipe.css');
   wp_enqueue_style('photoswipe_skin', $dir['theme'] . '/dist/photoswipe/default-skin/default-skin.css');
@@ -28,6 +28,7 @@ function add_javascripts() {
   global $dir;
   wp_enqueue_script('photoswipe', $dir['theme'] . '/dist/photoswipe/photoswipe.min.js');
   wp_enqueue_script('photoswipe_skin', $dir['theme'] . '/dist/photoswipe/photoswipe-ui-default.min.js');
+  wp_enqueue_script('bgblur', $dir['theme'] . '/javascripts/vendor/background-blur.min.js');
   wp_enqueue_script('app', $dir['theme'] . '/dist/min/app.js' );
 }
 

@@ -4,15 +4,24 @@
   @extend %webfont-nunito;
 }
 
-.webfont {
-  &.nunito {
-    @extend %webfont-nunito;
-  }
+.wf-lato {
+  @extend %webfont-lato;
 }
 
 #logo {
   &.rere {
-    @extend %webfont-nunito;
+    @extend %webfont-lato;
+    max-width: 75%;
+    max-height: 50px;
+
+    .h1.text {
+      font-size: 1.6em;
+
+      a {
+        margin: auto;
+        padding: 2.5% 0;
+      }
+    }
   }
 }
 
@@ -36,6 +45,13 @@
 .entry-content {
   // PhotoSwipeDOM
   .psgal {
+    // 読み込み完了前は少し薄くする
+    opacity: 0.7;
+
+    .loaded & {
+      opacity: 1;
+    }
+
     @include mediaquery('max', 340px) {
       width: 300px !important;
     }
@@ -48,6 +64,20 @@
 
     figcaption {
       display: none;
+    }
+  }
+}
+
+// Singleのカテゴリ調整
+#container {
+  .entry-header {
+    .byline {
+      .cat-name {
+        position: static;
+        left: inherit;
+        top: inherit;
+        transform: none;
+      }
     }
   }
 }
